@@ -1,0 +1,84 @@
+<div class="CubeCyber">
+
+<div class="example-box" cdkDrag>
+    <div class="scene" [ngStyle]="{'width':width, 'height':height}">
+        <div class="cube" [@changedirection]="currentDirection" [ngStyle]="{'width':width, 'height': height}">
+          <div id="translateZOne" class="cube__face cube__face--front" [ngStyle]="{'width':width, 'height': height}">front</div>
+          <div  id="translateZTwo" class="cube__face cube__face--back" [ngStyle]="{'width':width, 'height': height}">back</div>
+          <div  id="translateZThree" class="cube__face cube__face--right" [ngStyle]="{'width':width, 'height': height}">right</div>
+          <div  id="translateZFour" class="cube__face cube__face--left" [ngStyle]="{'width':width, 'height': height}">left</div>
+          <div  id="translateZFive" class="cube__face cube__face--top" [ngStyle]="{'width':width, 'height': height}">top</div>
+          <div  id="translateZSix" class="cube__face cube__face--bottom" [ngStyle]="{'width':width, 'height': height}">bottom</div>
+        </div>
+      </div>
+  </div>
+
+
+  <p class="radio-group" (change)="ChangedDirection($event.target.value)">
+      <label>
+        <input type="radio" name="rotate-cube-side" value="front" checked /> front
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="right" /> left
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="back" /> back
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="left" /> right
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="top" /> bottom
+      </label>
+      <label>
+        <input type="radio" name="rotate-cube-side" value="bottom" /> top
+      </label>
+    </p>
+
+
+    <form class="example-form" id="CubeDiminsionForm" (submit)="ChangedDiminsionOfCube(CubeDiminsionForm)" #CubeDiminsionForm="ngForm">
+        <mat-form-field class="example-full-width">
+          <input
+           matInput
+           name="cubewidth"
+           type="text"
+           #cubewidth="ngModel"
+           ngModel
+           placeholder="Width">
+        </mat-form-field>
+        <mat-form-field class="example-full-width">
+          <input
+          matInput
+          type="text"
+          name="cubeheight"
+          #cubeheight="ngModel"
+          ngModel
+          placeholder="Height">
+        </mat-form-field>
+        <button mat-raised-button color="primary" type="submit">Accept</button>
+      </form>
+
+
+
+      <mat-divider></mat-divider><br>
+      <button mat-raised-button color="primary"  (click)="SaveCubeInfo()">Save cube information</button>
+      <mat-divider></mat-divider><br>
+      <button mat-raised-button color="primary" (click)="GetAllCubes()">Show all cube information</button>
+      <mat-divider></mat-divider><br>
+      <a type="button" mat-raised-button  href="../../assets/pdf-files/Ohad.pdf" download>Download pdf</a>
+      <mat-divider></mat-divider><br>
+
+
+      <mat-accordion *ngFor="let cube of AllCubes; let i = index">
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Number of cube: {{i}}
+              </mat-panel-title>
+              <mat-panel-description>
+             {{cube.width}} {{ cube.height}} {{cube.direction}}
+              </mat-panel-description>
+            </mat-expansion-panel-header>
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
